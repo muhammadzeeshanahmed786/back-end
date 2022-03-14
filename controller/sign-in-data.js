@@ -1,7 +1,9 @@
 const signin = require('../models/login-schema')
 const User = require('../models/user-schema')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
+
+const bcryptjs=require('bcryptjs')
 
 module.exports = {
     signIn: async (req, res) => {
@@ -26,7 +28,7 @@ module.exports = {
 
             let pass = checkEmail?.password
             console.log(password, 'password')
-            let checkPassword = await bcrypt.compare(password, pass)
+            let checkPassword = await bcryptjs.compare(password, pass)
             console.log(checkPassword, 'check')
 
             if (!checkPassword) {

@@ -1,5 +1,5 @@
 const User = require('../models/user-schema')
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 module.exports = {
     createUser: async (req, res) => {
         try {
@@ -12,8 +12,8 @@ module.exports = {
                     masg: 'All Field Required'
                 })
             }
-            let salt = await bcrypt.genSalt(10)
-            let secPassword = await bcrypt.hash(password, salt)
+            let salt = await bcryptjs.genSalt(10)
+            let secPassword = await bcryptjs.hash(password, salt)
 
             let checkEmail = await User.findOne({ email: email }).exec()
             if (checkEmail) {
